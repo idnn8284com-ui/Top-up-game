@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ร้านเติมเกมออนไลน์</title>
+    <style>
+        body {
+            background-color: #0d1117;
+            color: #ffffff;
+            font-family: Arial, sans-serif;
+            padding: 15px;
+            margin: 0;
+        }
+        .topup-card {
+            background-color: #161b22;
+            padding: 20px;
+            border-radius: 12px;
+            border: 1px solid #30363d;
+            max-width: 400px;
+            margin: 20px auto;
+            box-sizing: border-box;
+        }
+        h2 {
+            color: #58a6ff;
+            text-align: center;
+            margin-top: 0;
+        }
+        label {
+            display: block;
+            margin-top: 12px;
+            font-size: 14px;
+            color: #8b949e;
+        }
+        input, select, button {
+            width: 100%;
+            padding: 12px;
+            margin-top: 6px;
+            border-radius: 8px;
+            border: 1px solid #30363d;
+            background-color: #0d1117;
+            color: white;
+            box-sizing: border-box;
+            font-size: 14px;
+        }
+        button {
+            background-color: #238636;
+            color: #ffffff;
+            font-weight: bold;
+            border: none;
+            margin-top: 20px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="topup-card">
+        <h2>🎮 ร้านเติมเกมออนไลน์</h2>
+        
+        <label>UID / ID ตัวละคร:</label>
+        <input type="text" placeholder="กรอก UID ของคุณ">
+        
+        <label>เลือกแพ็กเกจเติมเกม:</label>
+        <select>
+            <option>50 เพชร - 15 บาท</option>
+            <option>150 เพชร - 50 บาท</option>
+            <option>500 เพชร - 150 บาท</option>
+        </select>
+
+        <label>แนบรูปภาพสลิปโอนเงิน:</label>
+        <input type="file" accept="image/*">
+        
+        <button onclick="alert('ระบบรับข้อมูลเรียบร้อย!')">ยืนยันการเติมเงิน</button>
+    </div>
+</body>
+</html>
