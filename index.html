@@ -3,62 +3,96 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ร้านเติมเกมออนไลน์ - Top-up Store</title>
+    <title>Cyber Top-Up Store</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Kanit', sans-serif, Arial;
+            font-family: 'Kanit', sans-serif;
         }
 
         body {
-            background-color: #121318;
+            background-color: #08090d;
+            background-image: radial-gradient(circle at 50% 10%, rgba(255, 0, 200, 0.15), rgba(0, 242, 255, 0.05) 50%, transparent 100%);
             color: #ffffff;
-            padding-bottom: 50px;
+            padding-bottom: 60px;
+            min-height: 100vh;
         }
 
-        /* Header Bar */
+        /* Navbar */
         .navbar {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background-color: #1a1c23;
-            padding: 12px 16px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+            background: rgba(15, 17, 26, 0.85);
+            backdrop-filter: blur(10px);
+            padding: 14px 18px;
+            border-bottom: 1px solid rgba(0, 242, 255, 0.3);
+            box-shadow: 0 0 15px rgba(0, 242, 255, 0.2);
             position: sticky;
             top: 0;
             z-index: 100;
         }
 
-        .user-balance {
-            display: flex;
-            gap: 8px;
-        }
-
         .badge-balance {
-            background-color: #272a36;
-            padding: 4px 10px;
+            background: rgba(255, 0, 200, 0.1);
+            border: 1px solid #ff00c8;
+            padding: 6px 14px;
             border-radius: 20px;
-            font-size: 12px;
-            border: 1px solid #383c4d;
-            color: #ff9800;
+            font-size: 13px;
+            color: #00f2ff;
+            box-shadow: 0 0 10px rgba(255, 0, 200, 0.3);
         }
 
-        /* Announcement Bar */
+        /* Hero Banner Cyber Circle */
+        .hero-banner {
+            margin: 15px;
+            padding: 20px;
+            border-radius: 20px;
+            background: linear-gradient(135deg, rgba(255, 0, 200, 0.2), rgba(0, 242, 255, 0.2));
+            border: 1.5px solid #00f2ff;
+            box-shadow: 0 0 20px rgba(0, 242, 255, 0.3), inset 0 0 15px rgba(255, 0, 200, 0.2);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-banner::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,0,200,0.2) 10%, transparent 40%);
+            animation: rotate 10s linear infinite;
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .hero-title {
+            position: relative;
+            font-size: 22px;
+            font-weight: 600;
+            background: linear-gradient(90deg, #00f2ff, #ff00c8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 15px rgba(0, 242, 255, 0.5);
+        }
+
         .announcement {
-            background: linear-gradient(90deg, #ff8c00, #ff5500);
-            color: #fff;
+            background: rgba(255, 0, 200, 0.15);
+            border-y: 1px solid rgba(255, 0, 200, 0.3);
+            color: #ffb3f3;
             padding: 8px 12px;
             font-size: 13px;
-            white-space: nowrap;
-            overflow: hidden;
-            box-shadow: inset 0 -2px 5px rgba(0,0,0,0.2);
-        }
-
-        .announcement marquee {
-            vertical-align: middle;
+            box-shadow: inset 0 0 10px rgba(255, 0, 200, 0.2);
         }
 
         .container {
@@ -68,12 +102,14 @@
         }
 
         .section-title {
-            font-size: 18px;
-            font-weight: bold;
-            margin: 15px 0 10px 0;
+            font-size: 16px;
+            font-weight: 600;
+            margin: 20px 0 12px 0;
+            color: #00f2ff;
             display: flex;
             align-items: center;
             gap: 8px;
+            text-shadow: 0 0 8px rgba(0, 242, 255, 0.6);
         }
 
         /* Game Grid */
@@ -84,19 +120,21 @@
         }
 
         .game-card {
-            background-color: #1e2029;
+            background: #121520;
             border-radius: 16px;
-            padding: 6px;
+            padding: 8px;
             text-align: center;
             position: relative;
             cursor: pointer;
-            transition: transform 0.2s, border 0.2s;
-            border: 2px solid transparent;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 0, 200, 0.2);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
         }
 
         .game-card:hover, .game-card.active {
-            transform: translateY(-3px);
-            border-color: #ff5500;
+            transform: translateY(-5px) scale(1.02);
+            border-color: #00f2ff;
+            box-shadow: 0 0 18px rgba(0, 242, 255, 0.6), 0 0 30px rgba(255, 0, 200, 0.4);
         }
 
         .game-card img {
@@ -108,150 +146,161 @@
 
         .game-title {
             font-size: 12px;
-            margin-top: 6px;
+            margin-top: 8px;
             font-weight: 500;
-            color: #e0e0e0;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
+            color: #ffffff;
         }
 
         .discount-tag {
             position: absolute;
-            top: 2px;
-            left: 2px;
-            background: linear-gradient(135deg, #ff0055, #ff0000);
+            top: 4px;
+            left: 4px;
+            background: linear-gradient(135deg, #ff00c8, #7900ff);
             color: white;
             font-size: 9px;
             font-weight: bold;
             padding: 2px 6px;
-            border-radius: 10px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.4);
+            border-radius: 8px;
+            box-shadow: 0 0 8px rgba(255, 0, 200, 0.8);
         }
 
-        /* Form Area */
+        /* Topup Form */
         .topup-form-card {
-            background-color: #1a1c23;
-            border-radius: 16px;
-            padding: 20px;
-            margin-top: 20px;
-            border: 1px solid #2d303e;
-            display: none; /* ซ่อนไว้ก่อน พอกดเลือกเกมค่อยขึ้น */
+            background: rgba(18, 21, 32, 0.95);
+            border-radius: 20px;
+            padding: 22px;
+            margin-top: 25px;
+            border: 1px solid #ff00c8;
+            box-shadow: 0 0 25px rgba(255, 0, 200, 0.25);
+            display: none;
         }
 
         .form-group {
-            margin-bottom: 15px;
+            margin-bottom: 16px;
         }
 
         .form-group label {
             display: block;
             font-size: 13px;
-            margin-bottom: 6px;
-            color: #aaa;
+            margin-bottom: 8px;
+            color: #00f2ff;
         }
 
         .form-control {
             width: 100%;
-            padding: 12px;
-            border-radius: 8px;
-            border: 1px solid #333745;
-            background-color: #121318;
+            padding: 12px 14px;
+            border-radius: 10px;
+            border: 1px solid rgba(0, 242, 255, 0.3);
+            background-color: #0a0c12;
             color: #fff;
             font-size: 14px;
             outline: none;
+            transition: 0.3s;
         }
 
         .form-control:focus {
-            border-color: #ff5500;
+            border-color: #ff00c8;
+            box-shadow: 0 0 10px rgba(255, 0, 200, 0.5);
         }
 
         .btn-submit {
             width: 100%;
             padding: 14px;
-            background: linear-gradient(90deg, #28a745, #20c997);
+            background: linear-gradient(90deg, #00f2ff, #ff00c8);
             border: none;
-            border-radius: 8px;
+            border-radius: 10px;
             color: white;
             font-size: 16px;
-            font-weight: bold;
+            font-weight: 600;
             cursor: pointer;
-            box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
+            box-shadow: 0 0 15px rgba(0, 242, 255, 0.5);
+            transition: 0.3s;
         }
 
+        .btn-submit:hover {
+            opacity: 0.9;
+            box-shadow: 0 0 25px rgba(255, 0, 200, 0.8);
+        }
+
+        /* Floating Social Buttons */
         .floating-social {
             position: fixed;
             bottom: 20px;
             right: 15px;
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 12px;
         }
 
         .social-btn {
-            width: 45px;
-            height: 45px;
+            width: 46px;
+            height: 46px;
             border-radius: 50%;
             display: flex;
             justify-content: center;
             align-items: center;
             color: white;
-            font-size: 20px;
+            font-size: 22px;
             text-decoration: none;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+            box-shadow: 0 0 12px rgba(0,0,0,0.6);
         }
 
-        .btn-line { background-color: #06c755; }
-        .btn-fb { background-color: #1877f2; }
+        .btn-line { background-color: #06c755; box-shadow: 0 0 10px rgba(6, 199, 85, 0.5); }
+        .btn-fb { background-color: #1877f2; box-shadow: 0 0 10px rgba(24, 119, 242, 0.5); }
     </style>
 </head>
 <body>
 
     <!-- Navbar -->
     <div class="navbar">
-        <i class="fa-solid fa-bars" style="font-size: 20px;"></i>
-        <div class="user-balance">
-            <span class="badge-balance"><i class="fa-solid fa-wallet"></i> CREDIT: 0.00</span>
-        </div>
-        <i class="fa-solid fa-circle-user" style="font-size: 24px;"></i>
+        <i class="fa-solid fa-bars" style="font-size: 20px; color: #00f2ff;"></i>
+        <div class="badge-balance"><i class="fa-solid fa-wallet"></i> CREDIT: 0.00</div>
+        <i class="fa-solid fa-circle-user" style="font-size: 24px; color: #ff00c8;"></i>
     </div>
 
     <!-- Announcement -->
     <div class="announcement">
-        <marquee>🔥 ยินดีต้อนรับสู่ร้านเติมเกมออนไลน์ บริการเติมเกมเร็วทันใจ 24 ช.ม. สแกนจ่ายอัตโนมัติ 🔥</marquee>
+        <marquee>⚡ ยินดีต้อนรับสู่ Cyber Top-Up บริการเติมเกมระบบอัตโนมัติ 24 ช.ม. ได้รับเพชรทันใจ ⚡</marquee>
     </div>
 
+    <!-- Banner -->
     <div class="container">
+        <div class="hero-banner">
+            <div class="hero-title">⚡ CYBER GAME TOPUP ⚡</div>
+            <p style="font-size: 12px; color: #a0a5c0; margin-top: 4px;">บริการเติมเกมออนไลน์ ราคาส่ง สแกนผ่าน QR Code</p>
+        </div>
+
         <div class="section-title">
-            <i class="fa-solid fa-gamepad" style="color: #ff5500;"></i> เลือกเกมที่ต้องการเติม
+            <i class="fa-solid fa-fire" style="color: #ff00c8;"></i> เลือกเกมที่ต้องการเติม
         </div>
 
         <!-- Game Grid -->
         <div class="game-grid">
             <div class="game-card" onclick="selectGame('ROV')">
                 <span class="discount-tag">ลด 23%</span>
-                <img src="https://img.freepik.com/free-vector/joystick-game-controller-icon_1308-132386.jpg" alt="ROV">
+                <img src="https://play-lh.googleusercontent.com/N_31V0HThYj1O4S2W70vN8J3R3-1_N_d6J6Xn-S6e22S" alt="ROV" onerror="this.src='https://via.placeholder.com/100/ff00c8/ffffff?text=ROV'">
                 <div class="game-title">ROV</div>
             </div>
             <div class="game-card" onclick="selectGame('Free Fire')">
                 <span class="discount-tag">ลด 26%</span>
-                <img src="https://img.freepik.com/free-vector/game-control-icon_24908-55260.jpg" alt="Free Fire">
+                <img src="https://play-lh.googleusercontent.com/97y5eHIna2h1XJ9E-M9z6X1a-s_e5X3X" alt="Free Fire" onerror="this.src='https://via.placeholder.com/100/00f2ff/ffffff?text=FreeFire'">
                 <div class="game-title">Free Fire</div>
             </div>
             <div class="game-card" onclick="selectGame('Roblox')">
                 <span class="discount-tag">ลด 30%</span>
-                <img src="https://img.freepik.com/free-vector/video-game-controller-icon_24908-58925.jpg" alt="Roblox">
+                <img src="https://play-lh.googleusercontent.com/WNW_L22Z11I_V1y2c771122" alt="Roblox" onerror="this.src='https://via.placeholder.com/100/ff00c8/ffffff?text=Roblox'">
                 <div class="game-title">Roblox</div>
             </div>
             <div class="game-card" onclick="selectGame('PUBG Mobile')">
                 <span class="discount-tag">ลด 15%</span>
-                <img src="https://img.freepik.com/free-vector/flat-game-controller-background_23-2148098020.jpg" alt="PUBG">
+                <img src="https://play-lh.googleusercontent.com/JRd05v04CDP37-188" alt="PUBG" onerror="this.src='https://via.placeholder.com/100/00f2ff/ffffff?text=PUBG'">
                 <div class="game-title">PUBG</div>
             </div>
         </div>
 
         <!-- Top-up Form -->
         <div class="topup-form-card" id="topupForm">
-            <h3 style="margin-bottom: 15px; color: #ff5500;" id="selectedGameName">เติมเกม</h3>
+            <h3 style="margin-bottom: 16px; color: #00f2ff; text-align: center;" id="selectedGameName">เติมเกม</h3>
             
             <div class="form-group">
                 <label>UID / ID ตัวละคร:</label>
@@ -273,11 +322,11 @@
                 <input type="file" class="form-control" accept="image/*">
             </div>
 
-            <button class="btn-submit" onclick="alert('ส่งรายการเติมเงินเรียบร้อยแล้ว!')">ยืนยันการเติมเงิน</button>
+            <button class="btn-submit" onclick="alert('ส่งข้อมูลการเติมเงินเรียบร้อยแล้ว!')">ยืนยันการเติมเงิน</button>
         </div>
     </div>
 
-    <!-- Floating Social Buttons -->
+    <!-- Floating Social -->
     <div class="floating-social">
         <a href="#" class="social-btn btn-line"><i class="fa-brands fa-line"></i></a>
         <a href="#" class="social-btn btn-fb"><i class="fa-brands fa-facebook-f"></i></a>
