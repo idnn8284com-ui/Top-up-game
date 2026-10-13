@@ -3,74 +3,292 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ร้านเติมเกมออนไลน์</title>
+    <title>ร้านเติมเกมออนไลน์ - Top-up Store</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
-        body {
-            background-color: #0d1117;
-            color: #ffffff;
-            font-family: Arial, sans-serif;
-            padding: 15px;
-            margin: 0;
-        }
-        .topup-card {
-            background-color: #161b22;
-            padding: 20px;
-            border-radius: 12px;
-            border: 1px solid #30363d;
-            max-width: 400px;
-            margin: 20px auto;
+        * {
             box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Kanit', sans-serif, Arial;
         }
-        h2 {
-            color: #58a6ff;
+
+        body {
+            background-color: #121318;
+            color: #ffffff;
+            padding-bottom: 50px;
+        }
+
+        /* Header Bar */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #1a1c23;
+            padding: 12px 16px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .user-balance {
+            display: flex;
+            gap: 8px;
+        }
+
+        .badge-balance {
+            background-color: #272a36;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            border: 1px solid #383c4d;
+            color: #ff9800;
+        }
+
+        /* Announcement Bar */
+        .announcement {
+            background: linear-gradient(90deg, #ff8c00, #ff5500);
+            color: #fff;
+            padding: 8px 12px;
+            font-size: 13px;
+            white-space: nowrap;
+            overflow: hidden;
+            box-shadow: inset 0 -2px 5px rgba(0,0,0,0.2);
+        }
+
+        .announcement marquee {
+            vertical-align: middle;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 15px;
+        }
+
+        .section-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin: 15px 0 10px 0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* Game Grid */
+        .game-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+        }
+
+        .game-card {
+            background-color: #1e2029;
+            border-radius: 16px;
+            padding: 6px;
             text-align: center;
-            margin-top: 0;
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.2s, border 0.2s;
+            border: 2px solid transparent;
         }
-        label {
+
+        .game-card:hover, .game-card.active {
+            transform: translateY(-3px);
+            border-color: #ff5500;
+        }
+
+        .game-card img {
+            width: 100%;
+            aspect-ratio: 1/1;
+            object-fit: cover;
+            border-radius: 12px;
+        }
+
+        .game-title {
+            font-size: 12px;
+            margin-top: 6px;
+            font-weight: 500;
+            color: #e0e0e0;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .discount-tag {
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            background: linear-gradient(135deg, #ff0055, #ff0000);
+            color: white;
+            font-size: 9px;
+            font-weight: bold;
+            padding: 2px 6px;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.4);
+        }
+
+        /* Form Area */
+        .topup-form-card {
+            background-color: #1a1c23;
+            border-radius: 16px;
+            padding: 20px;
+            margin-top: 20px;
+            border: 1px solid #2d303e;
+            display: none; /* ซ่อนไว้ก่อน พอกดเลือกเกมค่อยขึ้น */
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
             display: block;
-            margin-top: 12px;
-            font-size: 14px;
-            color: #8b949e;
+            font-size: 13px;
+            margin-bottom: 6px;
+            color: #aaa;
         }
-        input, select, button {
+
+        .form-control {
             width: 100%;
             padding: 12px;
-            margin-top: 6px;
             border-radius: 8px;
-            border: 1px solid #30363d;
-            background-color: #0d1117;
-            color: white;
-            box-sizing: border-box;
+            border: 1px solid #333745;
+            background-color: #121318;
+            color: #fff;
             font-size: 14px;
+            outline: none;
         }
-        button {
-            background-color: #238636;
-            color: #ffffff;
-            font-weight: bold;
+
+        .form-control:focus {
+            border-color: #ff5500;
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(90deg, #28a745, #20c997);
             border: none;
-            margin-top: 20px;
+            border-radius: 8px;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
             cursor: pointer;
+            box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
         }
+
+        .floating-social {
+            position: fixed;
+            bottom: 20px;
+            right: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .social-btn {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 20px;
+            text-decoration: none;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+        }
+
+        .btn-line { background-color: #06c755; }
+        .btn-fb { background-color: #1877f2; }
     </style>
 </head>
 <body>
-    <div class="topup-card">
-        <h2>🎮 ร้านเติมเกมออนไลน์</h2>
-        
-        <label>UID / ID ตัวละคร:</label>
-        <input type="text" placeholder="กรอก UID ของคุณ">
-        
-        <label>เลือกแพ็กเกจเติมเกม:</label>
-        <select>
-            <option>50 เพชร - 15 บาท</option>
-            <option>150 เพชร - 50 บาท</option>
-            <option>500 เพชร - 150 บาท</option>
-        </select>
 
-        <label>แนบรูปภาพสลิปโอนเงิน:</label>
-        <input type="file" accept="image/*">
-        
-        <button onclick="alert('ระบบรับข้อมูลเรียบร้อย!')">ยืนยันการเติมเงิน</button>
+    <!-- Navbar -->
+    <div class="navbar">
+        <i class="fa-solid fa-bars" style="font-size: 20px;"></i>
+        <div class="user-balance">
+            <span class="badge-balance"><i class="fa-solid fa-wallet"></i> CREDIT: 0.00</span>
+        </div>
+        <i class="fa-solid fa-circle-user" style="font-size: 24px;"></i>
     </div>
+
+    <!-- Announcement -->
+    <div class="announcement">
+        <marquee>🔥 ยินดีต้อนรับสู่ร้านเติมเกมออนไลน์ บริการเติมเกมเร็วทันใจ 24 ช.ม. สแกนจ่ายอัตโนมัติ 🔥</marquee>
+    </div>
+
+    <div class="container">
+        <div class="section-title">
+            <i class="fa-solid fa-gamepad" style="color: #ff5500;"></i> เลือกเกมที่ต้องการเติม
+        </div>
+
+        <!-- Game Grid -->
+        <div class="game-grid">
+            <div class="game-card" onclick="selectGame('ROV')">
+                <span class="discount-tag">ลด 23%</span>
+                <img src="https://img.freepik.com/free-vector/joystick-game-controller-icon_1308-132386.jpg" alt="ROV">
+                <div class="game-title">ROV</div>
+            </div>
+            <div class="game-card" onclick="selectGame('Free Fire')">
+                <span class="discount-tag">ลด 26%</span>
+                <img src="https://img.freepik.com/free-vector/game-control-icon_24908-55260.jpg" alt="Free Fire">
+                <div class="game-title">Free Fire</div>
+            </div>
+            <div class="game-card" onclick="selectGame('Roblox')">
+                <span class="discount-tag">ลด 30%</span>
+                <img src="https://img.freepik.com/free-vector/video-game-controller-icon_24908-58925.jpg" alt="Roblox">
+                <div class="game-title">Roblox</div>
+            </div>
+            <div class="game-card" onclick="selectGame('PUBG Mobile')">
+                <span class="discount-tag">ลด 15%</span>
+                <img src="https://img.freepik.com/free-vector/flat-game-controller-background_23-2148098020.jpg" alt="PUBG">
+                <div class="game-title">PUBG</div>
+            </div>
+        </div>
+
+        <!-- Top-up Form -->
+        <div class="topup-form-card" id="topupForm">
+            <h3 style="margin-bottom: 15px; color: #ff5500;" id="selectedGameName">เติมเกม</h3>
+            
+            <div class="form-group">
+                <label>UID / ID ตัวละคร:</label>
+                <input type="text" class="form-control" placeholder="กรอก UID ของคุณ">
+            </div>
+
+            <div class="form-group">
+                <label>เลือกแพ็กเกจเติมเกม:</label>
+                <select class="form-control">
+                    <option>50 เพชร / คูปอง - 15 บาท</option>
+                    <option>150 เพชร / คูปอง - 45 บาท</option>
+                    <option>500 เพชร / คูปอง - 140 บาท</option>
+                    <option>1,000 เพชร / คูปอง - 270 บาท</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>แนบรูปภาพสลิปโอนเงิน:</label>
+                <input type="file" class="form-control" accept="image/*">
+            </div>
+
+            <button class="btn-submit" onclick="alert('ส่งรายการเติมเงินเรียบร้อยแล้ว!')">ยืนยันการเติมเงิน</button>
+        </div>
+    </div>
+
+    <!-- Floating Social Buttons -->
+    <div class="floating-social">
+        <a href="#" class="social-btn btn-line"><i class="fa-brands fa-line"></i></a>
+        <a href="#" class="social-btn btn-fb"><i class="fa-brands fa-facebook-f"></i></a>
+    </div>
+
+    <script>
+        function selectGame(name) {
+            document.getElementById('topupForm').style.display = 'block';
+            document.getElementById('selectedGameName').innerText = 'เติมเกม ' + name;
+            window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+        }
+    </script>
 </body>
 </html>
