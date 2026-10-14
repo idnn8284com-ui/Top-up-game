@@ -34,8 +34,9 @@
     <!-- TOP NAVBAR -->
     <header class="sticky top-0 z-50 bg-darkbg/95 backdrop-blur-md border-b border-cyan-500/20">
         <div class="max-w-md mx-auto px-4 py-3 flex justify-between items-center">
+            <!-- Logo עם Fallback & Direct Image Load -->
             <div class="flex items-center space-x-3 cursor-pointer" onclick="switchTab('store')">
-                <img src="IMG_20251209_143528_502file_00000006be4622f95fa2476f21fbd2c.png" alt="Kommeno Shop Logo" class="w-10 h-10 rounded-xl object-cover neon-glow cyber-border" onerror="this.src='https://images.unsplash.com/photo-1542751371-adc38448a05e?w=100'">
+                <img id="main-logo" src="IMG_20251209_143528_502file_00000006be4622f95fa2476f21fbd2c.png" alt="Kommeno Shop Logo" class="w-11 h-11 rounded-xl object-cover neon-glow cyber-border" onerror="handleLogoError(this)">
                 <div>
                     <span class="text-base font-black tracking-wider bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-500 bg-clip-text text-transparent">
                         KOMMENO SHOP
@@ -204,6 +205,12 @@
 
     <!-- JAVASCRIPT LOGIC -->
     <script>
+        function handleLogoError(img) {
+            // หากดึงรูปไม่สำเร็จ ให้สลับใช้อีก URL สำรองทันที
+            img.onerror = null;
+            img.src = 'https://api.iconify.design/emojione-v1:cat-face-with-wry-smile.svg';
+        }
+
         let gamesData = [
             { id: 1, name: 'RoV - Arena of Valor', img: 'https://images.unsplash.com/photo-1542751371-adc38448a05e?w=300', packages: [
                 { id: 101, name: '40 Coupons', price: 35 },
@@ -299,7 +306,7 @@
             
             document.getElementById('pay-game-name').innerText = currentSelectedGame.name;
             document.getElementById('pay-pkg-name').innerText = currentSelectedPkg.name;
-            document.getElementById('pay-user-id').innerText, userId;
+            document.getElementById('pay-user-id').innerText = userId;
             document.getElementById('pay-price').innerText = currentSelectedPkg.price + ' บาท';
 
             switchTab('checkout');
@@ -354,7 +361,6 @@
 
         function addNewGame() {
             const name = document.getElementById('adm-game-name').value.trim();
-            name = name.trim();
             const img = document.getElementById('adm-game-img').value.trim();
             if(!name || !img) {
                 alert('กรุณากรอกข้อมูลเกมให้ครบถ้วน');
@@ -374,10 +380,4 @@
             gamesData.push(newGame);
             alert('เพิ่มเกมสำเร็จ!');
             document.getElementById('adm-game-name').value = '';
-            document.getElementById('adm-game-img').value = '';
-            switchTab('store');
-        }
-
-        function renderAdminOrders() {
-            const adminList = document.getElementById('admin-orders-list');
-            if(!adminL
+            docum
